@@ -1,6 +1,8 @@
 import React, { createContext, useCallback, useState } from 'react';
+import api from '../services/api';
 
 export const GithubContext = createContext({
+    loading: false,
     user: {
 
     },
@@ -10,6 +12,7 @@ export const GithubContext = createContext({
 
 const GithubProvider = ({ children }) => {
     const [githubState, setGithubState] = useState({
+        loading: false,
         userExists: false,
         user: {
 
@@ -19,7 +22,7 @@ const GithubProvider = ({ children }) => {
     });
 
     const getUser = (username) => {
-        const user = {
+        /* const user = {
           login: 'DaveJosef',
           name: 'José David',
           company: '@ifpb-cz-ads',
@@ -35,7 +38,52 @@ const GithubProvider = ({ children }) => {
             ...prevState,
             userExists: true,
             user,
+        })); */
+
+        setGithubState((prevState) => ({
+          ...prevState,
+          loading: true,
         }));
+        
+        api
+          .get(`users/${username}`)
+          .then(res => {
+            const {
+              login,
+              name,
+              company,
+              location,
+              twitter_username,
+              bio,
+              commits,
+              avatar_url,
+              html_url
+            } = res.data;
+            
+            setGithubState((prevState) => ({
+              ...prevState,
+              userExists: true,
+              user: {
+                login,
+                name,
+                company,
+                location,
+                twitter_username,
+                bio,
+                commits,
+                avatar_url,
+                html_url
+              }
+            }));
+            
+          })
+          .finally(() => {
+            setGithubState((prevState) => ({
+              ...prevState,
+              loading: false,
+            }));
+            
+          });
     }
 
 

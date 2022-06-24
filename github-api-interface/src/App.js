@@ -2,6 +2,8 @@ import { SearchBar } from './components/search-bar';
 import { ProfileData } from './components/profile-data';
 import { RepoGallery } from './components/repo-gallery/RepoGallery';
 
+import useGithub from './hooks/github-hooks';
+
 function App() {
   const user = {
     login: 'DaveJosef',
@@ -52,12 +54,14 @@ function App() {
       html_url: 'https://google.com',
     },
   ];
+
+  const { githubState } = useGithub();
   
   return (
     <div className="App">
       <SearchBar />
       <div className="Columns" >
-        <ProfileData user={ user } />
+        <ProfileData user={ githubState.user ? githubState.user : user } />
         <RepoGallery repoList={ repoList } starredList={ [repoList[0]] } />
       </div>
     </div>

@@ -1,4 +1,3 @@
-import { Tab, TabList, Tabs, TabPanel } from 'react-tabs';
 import { RepoList } from '../repo-list';
 import * as S from './styled';
 
@@ -7,19 +6,19 @@ export const RepoGallery = (props) => {
 
     return (
         <S.RepoGallery>
-            <Tabs>
-                <TabList>
-                    <Tab>User Repositories</Tab>
-                    <Tab>Starred Repositories</Tab>
-                </TabList>
+            <S.StyledTabs>
+                <S.StyledTabList>
+                    <S.StyledTab>User Repositories</S.StyledTab>
+                    <S.StyledTab>Starred Repositories</S.StyledTab>
+                </S.StyledTabList>
 
-                <TabPanel>
+                <S.StyledTabPanel>
                     <RepoList repoList={ repoList } />
-                </TabPanel>
-                <TabPanel>
+                </S.StyledTabPanel>
+                <S.StyledTabPanel>
                     <RepoList repoList={ starredList } />
-                </TabPanel>
-            </Tabs>
+                </S.StyledTabPanel>
+            </S.StyledTabs>
         </S.RepoGallery>
     );
 };
