@@ -22,24 +22,7 @@ const GithubProvider = ({ children }) => {
     });
 
     const getUser = (username) => {
-        /* const user = {
-          login: 'DaveJosef',
-          name: 'José David',
-          company: '@ifpb-cz-ads',
-          location: 'Sousa, Paraiba, Brazil',
-          twitter_username: 'josedaaaaavid',
-          bio: 'Stand by previous works',
-          commits: 1000000,
-          avatar_url: 'https://avatars.githubusercontent.com/u/50461429?v=4',
-          html_url: 'https://google.com'
-        };
-
-        setGithubState((prevState) => ({
-            ...prevState,
-            userExists: true,
-            user,
-        })); */
-
+      
         setGithubState((prevState) => ({
           ...prevState,
           loading: true,
@@ -48,6 +31,9 @@ const GithubProvider = ({ children }) => {
         api
           .get(`users/${username}`)
           .then(res => {
+
+            console.log(res.data);
+
             const {
               login,
               name,
@@ -88,83 +74,63 @@ const GithubProvider = ({ children }) => {
 
 
     const getUserRepos = (username) => {
-        const repoList = [
-          {
-            name: 'reponame',
-            description: 'description',
-            html_url: 'https://google.com',
-          },
-          {
-            name: 'reponame2',
-            description: 'description2',
-            html_url: 'https://google.com',
-          },
-          {
-            name: 'reponame3',
-            description: 'description3',
-            html_url: 'https://google.com',
-          },
-          {
-            name: 'reponame4',
-            description: 'description4',
-            html_url: 'https://google.com',
-          },
-          {
-            name: 'reponame5',
-            description: 'description5',
-            html_url: 'https://google.com',
-          },
-          {
-            name: 'reponame6',
-            description: 'description6',
-            html_url: 'https://google.com',
-          },
-        ];
+
+      setGithubState((prevState) => ({
+        ...prevState,
+        loading: true,
+      }));
       
-        setGithubState((prevState) => ({
+      api
+        .get(`users/${username}/repos`)
+        .then(res => {
+
+          console.log(res.data);
+
+          const repos = res.data;
+          
+          setGithubState((prevState) => ({
             ...prevState,
-            repos: repoList,
-        }));
+            repos
+          }));
+          
+        })
+        .finally(() => {
+          setGithubState((prevState) => ({
+            ...prevState,
+            loading: false,
+          }));
+          
+        });
     }
 
     const getUserStarred = (username) => {
-        const repoList = [
-          {
-            name: 'reponame',
-            description: 'description',
-            html_url: 'https://google.com',
-          },
-          {
-            name: 'reponame2',
-            description: 'description2',
-            html_url: 'https://google.com',
-          },
-          {
-            name: 'reponame3',
-            description: 'description3',
-            html_url: 'https://google.com',
-          },
-          {
-            name: 'reponame4',
-            description: 'description4',
-            html_url: 'https://google.com',
-          },
-          {
-            name: 'reponame5',
-            description: 'description5',
-            html_url: 'https://google.com',
-          },
-          {
-            name: 'reponame6',
-            description: 'description6',
-            html_url: 'https://google.com',
-          },
-        ];
+
+      setGithubState((prevState) => ({
+        ...prevState,
+        loading: true,
+      }));
       
-        setGithubState((prevState) => ({
+      api
+        .get(`users/${username}/starred`)
+        .then(res => {
+
+          console.log(res.data);
+
+          const starred = res.data;
+          
+          setGithubState((prevState) => ({
             ...prevState,
-            starred: repoList,
-        }));
+            starred
+          }));
+          
+        })
+        .finally(() => {
+          setGithubState((prevState) => ({
+            ...prevState,
+            loading: false,
+          }));
+          
+        });
     }
 
     const ContextValue = {

@@ -8,18 +8,19 @@ export function SearchBar(props) {
     const [ username, setUsername ] = useState('');
     const { getUser } = useGithub();
         
-    const submitUser = () => {
+    const submitUser = (event) => {
+        if (!username) return;
         getUser(username);
-        alert(`Hello, ${username ? username : 'username'}`);
+        event.preventDefault();
     }
 
-    const updateUsername = (username) => {
-        setUsername(username);
+    const updateUsername = (event) => {
+        setUsername(event.target.value);
     }
 
     return (
         <S.SearchBar>
-            <input placeholder='Github username' onChange={(event) => updateUsername(event.target.value)} ></input>
+            <input className='bordered' placeholder='Github username' onChange={updateUsername} value={username} ></input>
             <Button type='submit' onClick={submitUser} >Search</Button>
         </S.SearchBar>
     );

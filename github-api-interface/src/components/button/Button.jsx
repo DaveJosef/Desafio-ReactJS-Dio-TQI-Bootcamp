@@ -4,7 +4,7 @@ export const Button = (props) => {
     const { children, onClick } = props;
 
     return (
-        <S.Button onClick={onClick} >
+        <S.Button className='bordered' onClick={onClick} >
             { children }
         </S.Button>
     );

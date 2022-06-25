@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { COLORS } from '../../global/themes';
 
-export const SearchBar = styled.div`
+export const SearchBar = styled.form`
     top: 0;
     position: fixed;
     font-size: .9em;
@@ -9,15 +10,17 @@ export const SearchBar = styled.div`
     justify-content: center;
     min-height: 50px;
     width: 100%;
-    max-height: 100px;
-    background-color: #1e1e1e;
+    background-color: inherit;
     padding-top: .9rem;
+    border-bottom: 1px solid ${ COLORS.DARK };
 
     input {
         min-height: 50px;
         min-width: 300px;
         font-size: inherit;
         border-radius: 8px;
-        border: none;
+        border: inherit;
+        color: inherit;
+        margin-bottom: .9rem;
     }
 `;

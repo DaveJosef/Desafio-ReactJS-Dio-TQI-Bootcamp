@@ -8,31 +8,43 @@ export const ResetCSS = createGlobalStyle`
     }
 
     .App {
+        color: ${ COLORS.DARK };
         font-family: 'Josefin Sans', sans-serif;
         font-size: 20px;
-        font-weight: normal;
+        font-weight: bold;
         display: flex;
         flex-flow: column;
-        justify-content: center;
         min-height: 100vh;
-        background-color: #3e3e3e;
+        background-color: ${ COLORS.LIGHT3 };
+        padding-top: 10em;
         text-align: center;
     }
 
     .Columns {
         display: flex;
         flex-flow: row wrap;
-        justify-content: center;
-        background-color: #2e2e2e;
+        justify-content: space-evenly;
+        height: auto;
+        background-color: inherit;
+    }
+
+    h6 {
+        font-size: .9em;
     }
 
     a {
-        color: ${ COLORS.SECONDARY };
+        color: ${ COLORS.PRIMARY };
         text-decoration: none;
-        font-size: .9em;
     }
     
     a:visited {
-        color: ${ COLORS.PRIMARY };
+        color: ${ COLORS.SECONDARY };
+    }
+
+    .bordered {
+        padding-left: 8px;
+        padding-right: 8px;
+        border-radius: 8px;
+        border: 2px solid ${ COLORS.DARK };
     }
 `;
